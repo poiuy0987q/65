@@ -1,5 +1,5 @@
 script_author('Adrian G.')
-script_name('Чат-калькулятор')
+script_name('Г—Г ГІ-ГЄГ Г«ГјГЄГіГ«ГїГІГ®Г°')
 ----------------------------------------------------------------------------------------------------------------
 local imgui = require 'imgui'
 local window = imgui.ImBool(false)
@@ -16,29 +16,29 @@ function main()
     
         if text:find('%d+') and text:find('[-+/*^%%]') and not text:find('%a+') and text ~= nil then
             ok, number = pcall(load('return '..text))
-            result = 'Результат: '..number
+            result = 'ГђГҐГ§ГіГ«ГјГІГ ГІ: '..number
         end
 
         if text:find('%d+%%%*%d+') then
             number1, number2 = text:match('(%d+)%%%*(%d+)')
             number = number1*number2/100
             ok, number = pcall(load('return '..number))
-            result = 'Результат: '..number
+            result = 'ГђГҐГ§ГіГ«ГјГІГ ГІ: '..number
         end
 
         if text:find('%d+%%%/%d+') then
             number1, number2 = text:match('(%d+)%%%/(%d+)')
             number = number2/number1*100
             ok, number = pcall(load('return '..number))
-            result = 'Результат: '..number
+            result = 'ГђГҐГ§ГіГ«ГјГІГ ГІ: '..number
         end
 
-        if text:find('%d+/%d+%%') then
+        if text:imgui.SetNextWindowPos(imgui.ImVec2(windowPosX + 805, windowPosY+3), imgui.Cond.FirstUseEver)
             number1, number2 = text:match('(%d+)/(%d+)%%')
             number = number1*100/number2
             ok, number = pcall(load('return '..number))
             number = ok and number..'%' or number
-            result = 'Результат: '..number
+            result = 'ГђГҐГ§ГіГ«ГјГІГ ГІ: '..number
         end
 
 
@@ -78,14 +78,14 @@ function imgui.OnDrawFrame()
             imgui.SetNextWindowPos(imgui.ImVec2(windowPosX, windowPosY + 30 + 15), imgui.Cond.FirstUseEver)
             imgui.SetNextWindowSize(imgui.ImVec2(800, 130))
             imgui.Begin('Help', window2, imgui.WindowFlags.NoTitleBar + imgui.WindowFlags.NoResize + imgui.WindowFlags.NoMove)
-            imgui.Text(u8[[23%/100 - найти число исходя из процента. 23 - это процент, 100 это сколько составляет этот процент от неизвестного числа.
-23 процента равные числу 100, в 100 процентах будет 434.
+            imgui.Text(u8[[23%/100 - Г­Г Г©ГІГЁ Г·ГЁГ±Г«Г® ГЁГ±ГµГ®Г¤Гї ГЁГ§ ГЇГ°Г®Г¶ГҐГ­ГІГ . 23 - ГЅГІГ® ГЇГ°Г®Г¶ГҐГ­ГІ, 100 ГЅГІГ® Г±ГЄГ®Г«ГјГЄГ® Г±Г®Г±ГІГ ГўГ«ГїГҐГІ ГЅГІГ®ГІ ГЇГ°Г®Г¶ГҐГ­ГІ Г®ГІ Г­ГҐГЁГ§ГўГҐГ±ГІГ­Г®ГЈГ® Г·ГЁГ±Г«Г .
+23 ГЇГ°Г®Г¶ГҐГ­ГІГ  Г°Г ГўГ­Г»ГҐ Г·ГЁГ±Г«Гі 100, Гў 100 ГЇГ°Г®Г¶ГҐГ­ГІГ Гµ ГЎГіГ¤ГҐГІ 434.
 -
-23%*100 - найти число, которое составляет количество процентов. 23 - это количество процентов, 
-100 - число от которого нужно найти процент. 23 процента от числа 100 - это 23.
+23%*100 - Г­Г Г©ГІГЁ Г·ГЁГ±Г«Г®, ГЄГ®ГІГ®Г°Г®ГҐ Г±Г®Г±ГІГ ГўГ«ГїГҐГІ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЇГ°Г®Г¶ГҐГ­ГІГ®Гў. 23 - ГЅГІГ® ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® ГЇГ°Г®Г¶ГҐГ­ГІГ®Гў, 
+100 - Г·ГЁГ±Г«Г® Г®ГІ ГЄГ®ГІГ®Г°Г®ГЈГ® Г­ГіГ¦Г­Г® Г­Г Г©ГІГЁ ГЇГ°Г®Г¶ГҐГ­ГІ. 23 ГЇГ°Г®Г¶ГҐГ­ГІГ  Г®ГІ Г·ГЁГ±Г«Г  100 - ГЅГІГ® 23.
 -
-23/100% - найти процентное соотношение двух чисел. 23 - это число, процентное соотношение от числа 100.
-Число 23 составляет 23 процента от числа 100.]])
+23/100% - Г­Г Г©ГІГЁ ГЇГ°Г®Г¶ГҐГ­ГІГ­Г®ГҐ Г±Г®Г®ГІГ­Г®ГёГҐГ­ГЁГҐ Г¤ГўГіГµ Г·ГЁГ±ГҐГ«. 23 - ГЅГІГ® Г·ГЁГ±Г«Г®, ГЇГ°Г®Г¶ГҐГ­ГІГ­Г®ГҐ Г±Г®Г®ГІГ­Г®ГёГҐГ­ГЁГҐ Г®ГІ Г·ГЁГ±Г«Г  100.
+Г—ГЁГ±Г«Г® 23 Г±Г®Г±ГІГ ГўГ«ГїГҐГІ 23 ГЇГ°Г®Г¶ГҐГ­ГІГ  Г®ГІ Г·ГЁГ±Г«Г  100.]])
             imgui.End()
         end
     
